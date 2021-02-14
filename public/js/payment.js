@@ -45,18 +45,18 @@ function showElements() {
   }
 }
 
-// ノード追加
-function append() {
-  // li要素を生成
-  let li = document.createElement('li');
-  // テキストノードを生成
-  let text = document.createTextNode('こんにちは');
-  // liタグの要素にテキストノード textを追加
-  li.appendChild(text);
-  // idがlistsのulタグに、liを追加。具体的には<li>こんにちは</li>が追加される。
-  let listsElement = document.getElementById('lists');
-  listsElements.appendChild(li);
-}
+// // ノード追加
+// function append() {
+//   // li要素を生成
+//   let li = document.createElement('li');
+//   // テキストノードを生成
+//   let text = document.createTextNode('こんにちは');
+//   // liタグの要素にテキストノード textを追加
+//   li.appendChild(text);
+//   // idがlistsのulタグに、liを追加。具体的には<li>こんにちは</li>が追加される。
+//   let listsElement = document.getElementById('lists');
+//   listsElements.appendChild(li);
+// }
 
 // ノードの置換
 function replace() {
@@ -71,9 +71,57 @@ function replace() {
 
 
   // 置換前のoldlistの参照を変数oldlistに代入する
-  let oldlist = document.getElementsById('oldlist');
+  var oldlist = document.getElementById('oldList');
   // 親ノードulの参照を変数に代入
-  let parentNode = oldlist.parentNode;
+  var parentNode = oldlist.parentNode;
   // 既存ノードoldlistを、新規に作成したli要素newlist土地勘
   parentNode.replaceChild(newlist, oldlist);
+}
+
+// ノードの削除
+function remove() {
+  let parentElement = document.getElementById('lists');
+  let elements = parentElement.getElementsByTagName('li');
+  let removeIndex = elements.length - 1;
+  parentElement.removeChild(elements[removeIndex]);
+}
+
+// DOMの追加
+function append() {
+  // テキストボックスの要素を取得
+  let textbox = document.getElementById('textbox');
+  // li要素を生成
+  let li = document.createElement('li');
+  // テキストノードを生成
+  let text = document.createTextNode(textbox.value);
+  // liタグの要素にテキストノード textを追加
+  li.appendChild(text);
+  // idがlistsのulタグに、liを追加。具体的には<li>こんにちは</li>が追加される。
+  let listsElement = document.getElementById('lists');
+  listsElement.appendChild(li);
+}
+
+// イベント開始タグの中でイベントとイベントハンドラを関連づける
+function clicked() {
+  console.log('イベント発生');
+}
+
+// プロパティで関連づける
+let e = document.getElementById('button');
+e.onclick = function () {
+  console.log('イベント発生');
+}
+
+// loadイベント ページが読み終わったときに発生させるイベント
+window.onload = function () {
+  console.log('ロードイベント発生');
+}
+
+// addEventLictenerメソッド
+// 一つの要素や一つのイベントに対して、複数のイベントハンドラを設定できる
+window.onload = function () {
+  let e = document.getElementById('button');
+  e.addEventListener('click', function* () {
+    console.log('イベント発生');
+  }, false);
 }
